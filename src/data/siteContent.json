@@ -34,12 +34,6 @@
           "isEnabled": true
         },
         {
-          "label": "Experience",
-          "path": "#experience",
-          "type": "scroll",
-          "isEnabled": true
-        },
-        {
           "label": "Reserve Table",
           "path": "/reservation",
           "isEnabled": true
