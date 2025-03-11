@@ -5,6 +5,7 @@ import { Navigation } from '../components/Navigation';
 import { useContent } from '../context/ContentContext';
 import { Footer } from '../components/Footer';
 import { useMenu } from '../context/MenuContext';
+import Blog from '../components/Blog';
 
 
 export function Home() {

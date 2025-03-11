@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext, useCart } from '../context/CartContext';
 import { Trash } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CartDrawer: React.FC = () => {
   const { cart, addToCart, removeFromCart, updateQuantity } = useCart();
@@ -50,9 +51,11 @@ const CartDrawer: React.FC = () => {
               <div className="font-semibold text-xl">
                 Total: ${calculateTotal()}
               </div>
-              <button className="bg-yellow-400 text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-300 transition w-full mt-4">
-                Proceed to Checkout
-              </button>
+              <Link to="/checkout" className="w-full">
+                <button className="bg-yellow-400 text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-300 transition w-full mt-4">
+                  Proceed to Checkout
+                </button>
+              </Link>
             </div>
           </div>
         )}

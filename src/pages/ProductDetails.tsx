@@ -51,7 +51,7 @@ function ProductDetails() {
   return (
     <>
     <Navigation/>
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white py-20">
       <div className="container mx-auto mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="relative">
@@ -130,7 +130,7 @@ function ProductDetails() {
           </div>
         </div>
       </div>
-      <footer className="bg-zinc-900 py-16 px-6">
+      <footer className="bg-zinc-900 py-16 px-6 mt-3">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>

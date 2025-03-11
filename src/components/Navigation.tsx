@@ -55,7 +55,7 @@ export function Navigation() {
       </div>
 
       {/* Navigation Bar */}
-      <nav className={`w-full fixed z-50 ${isScrolled ? 'bg-black' : 'bg-transparent'} px-6 py-8 transition-colors duration-300`}>
+      <nav className={`w-full fixed z-30 ${isScrolled ? 'bg-black' : 'bg-transparent'} px-6 py-8 transition-colors duration-300`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link to="/" className="text-3xl font-bold">{siteContent.brand.name}</Link>
           <div className="hidden md:flex space-x-8 items-center">
