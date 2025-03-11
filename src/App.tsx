@@ -11,11 +11,12 @@ import { Navigation } from './components/Navigation'; // Import Navigation
 import CartDrawer from './components/CartDrawer'; // Import CartDrawer
 import { Trash } from 'lucide-react';
 import Gallery from './pages/Gallery';
+import { Contact } from './pages/Contact';
+import Reservation from './components/Reservation';
 
 export default function App() {
   return (
     <CartProvider>
-      {/* <Navigation />  */}
       <CartDrawer /> {/* Render CartDrawer outside Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,6 +26,8 @@ export default function App() {
         <Route path="/locations" element={<Locations />} />
         <Route path="/events" element={<Events />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/reservation" element={<Reservation />} />
       </Routes>
     </CartProvider>
   );
