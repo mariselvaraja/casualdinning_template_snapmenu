@@ -4,6 +4,7 @@ import { Footer } from '../components/Footer';
 import { Calendar, Clock, Users, UtensilsCrossed, MapPin, Phone, ArrowRight } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
 import axios from 'axios';
+import TableConfirmation from './TableConfirmation';
 
 export default function Reservation() {
   const [date, setDate] = useState('');
@@ -120,6 +121,18 @@ export default function Reservation() {
     return isValid;
   };
 
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [reservationDetails, setReservationDetails] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    date: '',
+    time: '',
+    guests: 0,
+    tableNumber: 0,
+    specialRequests: ''
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
@@ -143,9 +156,25 @@ export default function Reservation() {
           },
         });
 
+        // Store reservation details for confirmation page
+        setReservationDetails({
+          name,
+          email,
+          phone,
+          date,
+          time,
+          guests: parseInt(guests),
+          tableNumber: parseInt(tableNumber),
+          specialRequests
+        });
+
+        // Show confirmation component
+        setShowConfirmation(true);
+
         setSuccessMessage('Reservation submitted successfully!');
         setErrorMessage('');
-        // Clear the form fields
+        
+        // Clear the form fields (will only matter if user navigates back)
         setDate('');
         setTime('');
         setGuests('2');
@@ -161,6 +190,11 @@ export default function Reservation() {
       }
     }
   };
+
+  // If confirmation is shown, render the TableConfirmation component
+  if (showConfirmation) {
+    return <TableConfirmation reservationDetails={reservationDetails} />;
+  }
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -179,8 +213,8 @@ export default function Reservation() {
 
         <div className="relative z-10 container mx-auto px-6 h-[calc(50vh-120px)] flex items-center justify-center text-center">
           <div>
-            <div className="flex justify-center mb-6">
-              <UtensilsCrossed className="w-16 h-16 text-yellow-400" />
+            <div className="flex justify-center mb-6 ">
+              <UtensilsCrossed className="w-16 h-16 text-yellow-400 mt-[200px]" />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 animate-fade-in">
               {siteContent.reservation.header.title}

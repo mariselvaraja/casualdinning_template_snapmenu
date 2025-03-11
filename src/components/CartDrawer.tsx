@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CartContext, useCart } from '../context/CartContext';
-import { Trash } from 'lucide-react';
+import { Trash, X, Minus, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const CartDrawer: React.FC = () => {
@@ -17,42 +17,91 @@ const CartDrawer: React.FC = () => {
         isCartOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
-      <div className="p-6 flex flex-col h-full min-h-screen">
-        <h2 className="text-2xl font-semibold mb-4">Your Order</h2>
-        <button onClick={toggleCart} className="absolute top-4 right-4 text-gray-400 hover:text-gray-300">
-          X
-        </button>
+      <div className="flex flex-col h-full">
+        {/* Header */}
+        <div className="p-4 border-b border-zinc-800 flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Your Order</h2>
+          <button 
+            onClick={toggleCart} 
+            className="text-gray-400 hover:text-white transition"
+            aria-label="Close cart"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        
+        {/* Cart Content */}
         {cart.length === 0 ? (
-          <div className="flex justify-center items-center h-full">
+          <div className="flex-grow flex justify-center items-center p-6">
             <p>Your cart is empty.</p>
           </div>
         ) : (
           <div className="flex flex-col h-full">
-            <ul className="overflow-y-auto">
+            {/* Cart Items */}
+            <div className="flex-grow overflow-y-auto p-4">
               {cart.map((item) => (
-                <li key={item.id} className="py-2 border-b border-zinc-800 flex items-center">
-                  <img src={item.imageUrl} alt={item.name} className="w-16 h-16 object-cover mr-4" />
-                  <div>
-                    <h3 className="font-semibold">{item.name}</h3>
-                    <p>${item.price}</p>
+                <div key={item.id} className="flex items-center py-4 border-b border-zinc-800">
+                  {/* Item Image */}
+                  <div className="w-20 h-20 mr-4">
+                    <img 
+                      src={item.imageUrl} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover rounded"
+                    />
+                  </div>
+                  
+                  {/* Item Details */}
+                  <div className="flex-grow">
+                    <h3 className="font-semibold text-white">{item.name}</h3>
+                    <div className="text-yellow-400 font-semibold mt-1">${item.price}</div>
+                    
+                    {/* Quantity Controls */}
                     <div className="flex items-center mt-2">
-                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="px-2 py-1 bg-zinc-900 hover:bg-zinc-700 text-white">-</button>
-                      <span className="mx-2">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 bg-zinc-900 hover:bg-zinc-700 text-white">+</button>
+                      <button 
+                        onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                        className="p-1 rounded-full border border-zinc-700 hover:border-zinc-500 transition"
+                        aria-label="Decrease quantity"
+                      >
+                        <Minus className="w-3 h-3" />
+                      </button>
+                      <span className="mx-3 min-w-[20px] text-center">{item.quantity}</span>
+                      <button 
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="p-1 rounded-full border border-zinc-700 hover:border-zinc-500 transition"
+                        aria-label="Increase quantity"
+                      >
+                        <Plus className="w-3 h-3" />
+                      </button>
                     </div>
                   </div>
-                  <button onClick={() => removeFromCart(item.id)} className="ml-auto text-red-500 hover:text-red-700">
-                    <Trash className="w-5 h-5" />
-                  </button>
-                </li>
+                  
+                  {/* Price & Remove */}
+                  <div className="text-right">
+                    <div className="font-semibold">${(parseFloat(item.price) * item.quantity).toFixed(2)}</div>
+                    <button 
+                      onClick={() => removeFromCart(item.id)} 
+                      className="mt-2 text-red-500 hover:text-red-400 transition"
+                      aria-label="Remove item"
+                    >
+                      <Trash className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
               ))}
-            </ul>
-            <div className="mt-auto">
-              <div className="font-semibold text-xl">
-                Total: ${calculateTotal()}
+            </div>
+            
+            {/* Footer with Total and Checkout Button - Fixed at bottom */}
+            <div className="mt-auto p-4 border-t border-zinc-800 sticky bottom-0 bg-black">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-lg font-semibold">Total</span>
+                <span className="text-xl font-bold text-yellow-400">${calculateTotal()}</span>
               </div>
-              <Link to="/checkout" className="w-full">
-                <button className="bg-yellow-400 text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-300 transition w-full mt-4">
+              
+              <Link to="/checkout" className="block w-full">
+                <button 
+                  onClick={toggleCart}
+                  className="bg-yellow-400 text-black py-3 px-4 rounded-md text-lg font-semibold hover:bg-yellow-300 transition w-full"
+                >
                   Proceed to Checkout
                 </button>
               </Link>
