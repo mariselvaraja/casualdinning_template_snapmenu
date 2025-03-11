@@ -10,6 +10,7 @@ import { CartProvider } from './context/CartContext';
 import { Navigation } from './components/Navigation'; // Import Navigation
 import CartDrawer from './components/CartDrawer'; // Import CartDrawer
 import { Trash } from 'lucide-react';
+import Gallery from './pages/Gallery';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/about" element={<Story />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/gallery" element={<Gallery />} />
       </Routes>
     </CartProvider>
   );

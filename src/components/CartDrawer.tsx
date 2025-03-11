@@ -12,17 +12,19 @@ const CartDrawer: React.FC = () => {
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-96 bg-black text-white shadow-2xl border-l border-zinc-800 z-50 transform transition-transform duration-300 ${
+      className={`fixed top-0 right-0 min-h-screen w-96 bg-black text-white shadow-2xl border-l border-zinc-800 z-50 transform transition-transform duration-300 ${
         isCartOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
-      <div className="p-6 flex flex-col h-full">
+      <div className="p-6 flex flex-col h-full min-h-screen">
         <h2 className="text-2xl font-semibold mb-4">Your Order</h2>
         <button onClick={toggleCart} className="absolute top-4 right-4 text-gray-400 hover:text-gray-300">
           X
         </button>
         {cart.length === 0 ? (
-          <p>Your cart is empty.</p>
+          <div className="flex justify-center items-center h-full">
+            <p>Your cart is empty.</p>
+          </div>
         ) : (
           <div className="flex flex-col h-full">
             <ul className="overflow-y-auto">
