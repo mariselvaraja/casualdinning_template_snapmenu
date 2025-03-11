@@ -7,7 +7,6 @@ import { Locations } from './pages/Locations';
 import { Events } from './pages/Events';
 import ProductDetails from './pages/ProductDetails';
 import { CartProvider } from './context/CartContext';
-import { Navigation } from './components/Navigation'; // Import Navigation
 import CartDrawer from './components/CartDrawer'; // Import CartDrawer
 import { Trash } from 'lucide-react';
 import Gallery from './pages/Gallery';

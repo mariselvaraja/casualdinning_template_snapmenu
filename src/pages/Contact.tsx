@@ -2,14 +2,17 @@ import React from 'react';
 import { Navigation } from '../components/Navigation';
 import { useContent } from '../context/ContentContext';
 import { MapPin, Clock, Phone, Mail, Users } from 'lucide-react';
+import { Footer } from '../components/Footer';
 
 export function Contact() {
   const { siteContent } = useContent();
   const contactInfo = siteContent.contact;
 
   return (
+<>
+<Navigation/>
     <div className="min-h-screen bg-black text-white">
-      <Navigation />
+
       <div className="relative h-screen">
         <div className="absolute inset-0">
           <img
@@ -78,5 +81,7 @@ export function Contact() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
